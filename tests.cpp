@@ -2,18 +2,10 @@
 
 int main()
 {
-	int i1 = 0;
-	int i2 = i1;
-
-	cout << "int i1 value: " << i1
-			<< "\nint i2 value: " << i2
-			<< "\n";
-
-	i1 = 1;
-
-	cout << "int i1 value: " << i1
-			<< "\nint i2 value: " << i2
-			<< "\n";
+	double d = 2.5;
+	int i = 2;
+	int i2 {d/i};
+	cout << i2 << '\n';
 
 	return 0;
 }
