@@ -23,29 +23,31 @@ int main()
 		disliked.push_back(temp);
 
 	cout << "Next let's enter some words that you would like me to repeat back to you.\n";
-	char cont = 'y';
-	while (cont == 'y')
+	
+	cout << "Enter a word:";
+	string word;
+
+	if (cin.fail())
 	{
-		string word = "";
-		cin >> word;
-
-		bool bad = false;
-
-		// Check whether word is in the vector of disliked words.
-		for (string w : disliked) {
-			if (w == word)
-				bad = true;
-		}
-
-		if (bad == false)
-			cout << word << '\n';
-
-		cout << "Press 'y' to cont: ";
-		cin >> cont;
-
-		if (cont != 'y')
-			cout << "Goodbye.\n";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
+
+	cin >> word;
+	cout << "\nThe value you entered is: " << word << '\n';
+
+	bool bad = false;
+
+	// Check whether word is in the vector of disliked words.
+	for (string w : disliked) {
+		if (w == word)
+			bad = true;
+	}
+
+	if (bad == false)
+		cout << word << '\n';
+	else
+		cout << "bleep\n";
 
 	return 0;
 }
