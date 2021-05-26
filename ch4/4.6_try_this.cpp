@@ -11,6 +11,9 @@ When that works, add a few more.
 
 #include "../std_lib_facilities.h"
 
+//Function declarations
+void print_vector(vector<string> words);
+
 int main()
 {
 	// Create a vector to hold words that I don't like.
@@ -20,34 +23,48 @@ int main()
 
 	// Enter values into the vector
 	for (string temp; cin >> temp;)
-		disliked.push_back(temp);
+	{
+		if (temp == "*")
+			break;
+		else
+			disliked.push_back(temp);
+	}	
+
+	// print out what was entered
+	cout << "You entered: \n";
+	print_vector(disliked);
 
 	cout << "Next let's enter some words that you would like me to repeat back to you.\n";
-	
-	cout << "Enter a word:";
-	string word;
-
-	if (cin.fail())
-	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	}
-
-	cin >> word;
-	cout << "\nThe value you entered is: " << word << '\n';
+	string temp2;
 
 	bool bad = false;
+	char cont = 'y';
+	while (cont == 'y')
+	{
+		cout << "Enter a word: ";
+		temp2 = "";
+		cin >> temp2; // get a word from the user.
+		cout << "Checking of the word is in the list of bad words...\n";
+		
+		for (string w : disliked)
+			if (w == temp2)
+				bad = true;
 
-	// Check whether word is in the vector of disliked words.
-	for (string w : disliked) {
-		if (w == word)
-			bad = true;
+		if (bad == true)
+			cout << "The value you entered is: bleep. \n";
+		else
+			cout << "The value you entered is: " << temp2 << '\n';
+
+		cout << "Enter 'y' to continue entering: ";
+		cin >> cont;
+		bad = false;
 	}
 
-	if (bad == false)
-		cout << word << '\n';
-	else
-		cout << "bleep\n";
-
 	return 0;
+}
+
+void print_vector(vector<string> words)
+{
+	for (int i = 0; i < words.size(); ++i)
+		cout << "vector[" << i << "] == " << words[i] << '\n';
 }
